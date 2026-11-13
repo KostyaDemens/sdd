@@ -9,3 +9,4 @@ spring:
     hibernate:
       # Use `validate` in managed environments once migrations own the schema.
       ddl-auto: ${JPA_DDL_AUTO:update}
+    open-in-view: false
