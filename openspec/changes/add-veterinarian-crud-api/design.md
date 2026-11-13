@@ -26,6 +26,12 @@ Implement a JPA `Veterinarian` entity, a Spring Data repository, a service ownin
 
 Alternative: expose the JPA entity directly from a controller. Rejected because it couples the public contract to schema details and makes validation and future API evolution harder.
 
+### Package layout and boilerplate
+
+Use a layered package structure: `controller`, `service`, `repository`, `dto`, `entity`, and `mapper`. Place each class in the layer that owns its responsibility, and use a mapper to translate between entities and DTOs. Use Lombok for DTOs and entities when the generated code does not reduce readability; keep explicit code where it makes behavior or intent clearer.
+
+Alternative: keep all veterinarian classes in a single feature package and write all accessors manually. Rejected because the layered layout makes dependencies and responsibilities clearer as the API grows, while selective Lombok use removes routine boilerplate without obscuring the model.
+
 ### Generated numeric identifier and full replacement updates
 
 Use a generated numeric primary key for the database record. `PUT /api/veterinarians/{id}` accepts the complete editable representation and replaces those fields; the identifier remains immutable. This matches the requested CRUD semantics and makes update validation identical to creation validation.
